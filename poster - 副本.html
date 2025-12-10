@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Li et al. 2025 - LOCM Poster (Final Compact)</title>
+    <style>
+        /* ================= 全局样式 ================= */
+        :root {
+            --berkeley-blue: #003262; 
+            --california-gold: #FDB515;
+            --dark-gray: #333333;
+            --line-color: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #CCCCCC;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            font-family: "Times New Roman", Times, serif!important;
+            color: #000;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ================= A0 海报容器 ================= */
+       .poster {
+            width: 841mm;
+            min-height: 1189mm; 
+            height: auto; 
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            border: 1px solid #000;
+        }
+
+        /* ================= 头部 (Header) ================= */
+        header {
+            background-color: var(--berkeley-blue);
+            color: white;
+            padding: 12mm 40mm;
+            border-bottom: 8px solid var(--california-gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0; 
+        }
+
+       .header-content { width: 85%; }
+
+        h1 {
+            font-size: 3.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 10px; 
+            letter-spacing: 0.5px;
+        }
+
+        h2 {
+            font-size: 2.0rem;
+            font-style: italic;
+            font-weight: normal;
+            color: #E0E0E0;
+            margin-bottom: 15px;
+        }
+
+       .authors {
+            font-size: 1.6rem;
+            color: var(--california-gold);
+            font-weight: bold;
+        }
+        
+       .affiliations {
+            font-size: 1.3rem;
+            margin-top: 8px;
+        }
+
+        /* ================= 正文布局 (2x2 Grid) ================= */
+       .main-content {
+            padding: 15mm 40mm 15mm 40mm; 
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            gap: 30px 60px; 
+            align-items: stretch; 
+            flex-grow: 0; 
+        }
+
+        /* 模块样式 */
+       .module {
+            border: 2px solid #ddd;
+            padding: 25px; 
+            background-color: #fff;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
+            height: 100%; 
+            display: flex;
+            flex-direction: column;
+        }
+
+       .module-title {
+            font-size: 2.0rem;
+            font-weight: bold;
+            color: var(--berkeley-blue);
+            text-transform: uppercase;
+            border-bottom: 4px solid var(--berkeley-blue);
+            display: block; 
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+        }
+
+        p, li {
+            font-size: 1.3rem;
+            line-height: 1.4;
+            text-align: justify; 
+            text-justify: inter-word; 
+            margin-bottom: 12px;
+        }
+
+        ul { margin-left: 25px; padding-left: 10px; margin-bottom: 15px; }
+        li { margin-bottom: 8px; }
+        
+        strong { color: var(--berkeley-blue); }
+
+        /* 图片框 */
+       .fig-box {
+            border: 2px solid #333;
+            padding: 8px;
+            margin: 15px 0;
+            background: #fff;
+            align-self: center; 
+            width: 100%;
+        }
+       .real-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+            border: 1px solid #eee;
+        }
+       .caption {
+            font-size: 1.15rem;
+            font-style: italic;
+            margin-top: 8px;
+            color: #333;
+            text-align: justify;
+        }
+       .caption strong {
+            font-style: normal;
+            font-weight: bold;
+            color: var(--berkeley-blue);
+        }
+
+        /* 算法流程框 (本次修改区域) */
+       .algorithm-box {
+            border: 3px solid var(--california-gold);
+            
+            padding:  20px 46px 20px 18px;;
+            
+            background: #fffdf5;
+            font-size: 1.25rem;
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.1);
+            margin-top: auto; 
+            border-radius: 4px;
+        }
+
+        /* [修改2] 保持有序列表的左缩进。
+           padding-left: 45px 确保 "1." 向右移动，不贴边。
+        */
+        .algorithm-box ol {
+            padding-left: 45px;
+        }
+        
+        .math-eq {
+            font-family: "Times New Roman", serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            font-style: italic;
+            margin: 15px 0;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            display: block;
+            text-align: center;
+            border-radius: 4px;
+        }
+        .math-normal { font-style: normal; }
+
+        /* ================= 底栏 (Footer) ================= */
+        footer {
+            background-color: var(--berkeley-blue);
+            color: white;
+            padding: 12mm 40mm;
+            border-top: 10px solid var(--california-gold);
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 30px;
+            align-items: flex-start;
+            flex-shrink: 0;
+        }
+
+       .footer-col h3 {
+            font-size: 1.5rem;
+            color: var(--california-gold);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            padding-bottom: 5px;
+        }
+
+       .footer-text {
+            font-size: 1.2rem;
+            line-height: 1.4;
+            color: #ddd;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="poster">
+        
+        <header>
+            <div class="header-content">
+                <h1>Wide-Field, Artifact-Suppressed Lensless Microscopy</h1>
+                <h2>Via Feature-Agnostic Autofocus and Multi-Target Separable Phase Retrieval</h2>
+                <div class="authors">Ziyang Li, Xuyang Zhou, Sida Gao, Guancheng Huang, and Zhengjun Liu</div>
+                <div class="affiliations">School of Physics, Harbin Institute of Technology (HIT), China</div>
+            </div>
+        <div style="font-size: 5rem; font-weight: bold; color: var(--california-gold); text-shadow: 2px 2px 0px #000;">
+    HIT
+</div>
+        </header>
+
+        <div class="main-content">
+
+            <div class="module">
+                <div class="module-title">Part 1: System Configuration</div>
+                <p>A portable, cost-effective lensless setup is designed for robust operation in non-darkroom scenarios, eliminating the need for complex optical lenses.</p>
+                
+                 <div class="fig-box">
+                    <img src="1.png" alt="System Setup" class="real-image">
+                    <div class="caption"><strong>Fig. 1.</strong> Experimental setup for the lensless on-chip microscopy (LOCM) system, featuring a simple inline configuration.</div>
+                </div>
+
+                <ul>
+                    <li><strong>Coherent Source:</strong> A fiber laser (&lambda; = 532 nm) provides stable illumination, ensuring high-contrast diffraction patterns for phase retrieval.</li>
+                    <li><strong>Large-Area Detector:</strong> A standard CMOS sensor mounted on a 1D manual translation stage enables wide-field data acquisition without mechanical scanning.</li>
+                    <li><strong>Environmental Robustness:</strong> The algorithm is specifically designed to compensate for experimental imperfections such as platform vibration.</li>
+                </ul>
+            </div>
+
+            <div class="module">
+                <div class="module-title">Part 2: Complex Field Correction</div>
+                <p>A "Divide-and-Conquer" strategy is employed to rectify geometric distortions and address the challenge of non-planar biological samples.</p>
+                
+              <div class="fig-box">
+                    <img src="2.png" alt="Correction Process" class="real-image">
+                    <div class="caption"><strong>Fig. 2.</strong> Schematic of the complex field correction process, illustrating the autofocus and registration steps.</div>
+                </div>
+
+                <p><strong>A. Feature-Agnostic Autofocus</strong><br>
+                Conventional metrics fail on sparse samples. <strong>TV-regularized Single-Shot Phase Retrieval (SSPR)</strong> is utilized to accurately determine the axial distance.</p>
+
+                <p><strong>B. Segment-Dependent Registration</strong><br>
+                This step corrects for "diffraction scale magnification" (wavefront expansion) caused by varying propagation distances.</p>
+            </div>
+
+            <div class="module">
+                <div class="module-title">Part 3: MTS Phase Retrieval</div>
+                <p>To effectively eliminate environmental artifacts and cumulative noise, the <strong>Multi-Target Separable (MTS)</strong> algorithm is introduced.</p>
+                
+                <span class="math-eq">
+                    <i>u</i> = <i>p</i> <span class="math-normal">&odot;</span> (<i>x</i> + <i>n</i>)
+                </span>
+                
+               <div class="fig-box">
+                    <img src="4.png" alt="MTS Algorithm Flowchart" class="real-image">
+                    <div class="caption"><strong>Fig. 3.</strong> Flowchart of the MTS phase retrieval algorithm showing the iterative multi-objective optimization process.</div>
+                </div>
+
+                <div class="algorithm-box">
+                    <ol>
+                        <li><strong>Physical Model:</strong> Establishes a multi-objective optimization framework that decouples the optical field.</li>
+                        <li><strong>Optimization:</strong> Employs <strong>Momentum-accelerated SGD</strong>.</li>
+                        <li><strong>Core Advantage:</strong> Explicit <strong>"Error Prediction"</strong> mechanism.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="module">
+                <div class="module-title">Part 4: Summary & Validation</div>
+                
+               <div class="fig-box">
+                    <img src="5.png" alt="Experimental Results" class="real-image">
+                    <div class="caption"><strong>Fig. 4.</strong> Experimental results demonstrating pixel super-resolution capabilities.</div>
+                </div>
+
+                <p>The proposed framework demonstrates significant performance improvements:</p>
+                <ul>
+                    <li><strong>Full FOV:</strong> <strong>28.6 mm<sup>2</sup></strong> (Macro-scale).</li>
+                    <li><strong>Imaging Depth:</strong> <strong>&gt; 80 &mu;m</strong>.</li>
+                    <li><strong>Resolution:</strong> Achieves a <strong>775 nm</strong> half-pitch resolution.</li>
+                </ul>
+
+                <p style="margin-top: auto; padding-top:20px; border-top: 1px dashed #ccc;">
+                    <strong>Conclusion:</strong> A versatile and robust computational framework is presented that transforms a simple lensless setup into a high-fidelity imager.
+                </p>
+            </div>
+
+        </div>
+
+        <footer>
+            <div class="footer-col">
+                <h3>Funding Support</h3>
+                <div class="footer-text">
+                    - National Natural Science Foundation of China (NSFC)<br>
+                    - National Laboratory on Adaptive Optics of China
+                </div>
+            </div>
+<div class="footer-col" style="text-align:center; border-left:1px solid rgba(255,255,255,0.2); border-right:1px solid rgba(255,255,255,0.2);">
+                <h3>Key References</h3>
+                <div class="footer-text" style="font-size: 1.1rem; line-height: 1.4; text-align: left; padding-left: 20px;">
+                    <div style="margin-bottom: 4px;">[1] Z. Huang, L. Cao, <em>Light Sci. Appl.</em>, 2024.</div>
+                    <div style="margin-bottom: 4px;">[2] Z. Li, et al., <em>Opt. Lett.</em>, 2025.</div>
+                    <div style="margin-bottom: 4px;">[3] A. Greenbaum, et al., <em>Sci. Transl. Med.</em>, 2014.</div>
+                    <div style="margin-bottom: 4px;">[4] A. Maiden, et al., <em>Optica</em>, 2017.</div>
+                </div>
+            </div>
+            <div class="footer-col" style="text-align:right;">
+                <h3>Contact</h3>
+                <div class="footer-text">
+                    <strong>Prof. Zhengjun Liu</strong><br>
+                    zjliu@hit.edu.cn
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>
